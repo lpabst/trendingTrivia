@@ -78,6 +78,7 @@ article {
   margin: auto;
   background: #ededed;
   padding-bottom: 7vh;
+  position: relative;
 }
 
 .question-wrapper {
@@ -221,10 +222,62 @@ input[type="range"] {
 }
 .green {
   background: rgb(89, 189, 117);
+  height: 80px;
 }
 .yellow {
   background: rgb(213, 211, 70);
 }
 .red {
   background: rgb(218, 45, 123);
+  height: 80px;
+}
+
+.questions{
+  width: 95%;
+  height: 90px;
+  background: white;
+  margin: 4px auto 4px auto;
+  padding: 5px 5px;
+  position: relative;
+}
+
+.answer{
+  width: 45%;
+  cursor: pointer;
+}
+
+.a{
+  position: absolute;
+  left: 5px;
+  top: 25px;
+}
+
+.b{
+  position: absolute;
+  right: 5px;
+  top: 25px;
+}
+
+.c{
+  position: absolute;
+  left: 5px;
+  bottom: 5px;
+}
+
+.d{
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+}
+
+.previousButton{
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+
+.nextButton{
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 }

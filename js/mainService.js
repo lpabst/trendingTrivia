@@ -7,7 +7,10 @@ this.getData = function(){
 }
 
 this.next = function(){
-    page += 1;
+    if (page < 2){
+        page += 1;
+    }
+   
 }
 
 this.previous = function(){

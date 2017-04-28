@@ -17,25 +17,32 @@
     <h1>Trivia Trends</h1>
     <button><span>+</span> Add Question</button>
   </header>
+
   <article>
     <nav>
-      <a>All Questions</a>
+      <a ng-click="hideAnimalSearchBox()">All Questions</a>
       <a>Easy</a>
       <a>Medium</a>
       <a>Hard</a>
-      <a>Search by Animal</a>
+      <a ng-click='showAnimalSearchBox()'>Search by Animal</a>
     </nav>
     <div class="search">
-      <input type="text" placeholder="Animal to search by">
+      <input type="text" placeholder="Animal to search by" ng-show='animalSearch' ng-model='animal'>
     </div>
 
     <!-- Questions go here -->
-    <div class='questions' ng-repeat='question in questions'>
-      {{ question.question }}, {{ question.correct-answer }}
+    <div class='questions' ng-repeat='question in questions | filter: animal track by $index'>
+      <div ng-class="{'green': correct, 'red': !correct}">
+        {{ question.question }}
+        <div class='answer a' ng-click='addClass(question.correct_answer, 1)'>A. {{ question.options[1] }}</div>
+        <div class='answer b' ng-click='addClass(question.correct_answer, 2)'>B. {{ question.options[2] }}</div>
+        <div class='answer c' ng-click='addClass(question.correct_answer, 3)'>C. {{ question.options[3] }}</div>
+        <div class='answer d' ng-click='addClass(question.correct_answer, 4)'>D. {{ question.options[4] }}</div>
+      </div>
     </div>
 
-    <button ng-click='previous()'>Previous</button>
-    <button ng-click='next()'>Next</button>
+    <button class='previousButton'  ng-click='previous()'>Previous</button>
+    <button class='nextButton' ng-click='next()'>Next</button>
 
   </article>
 
