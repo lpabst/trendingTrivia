@@ -15,7 +15,7 @@
   <header>
     <div></div>
     <h1>Trivia Trends</h1>
-    <button ng-click='addQuestion'><span>+</span> Add Question</button>
+    <button ng-click='addQuestion()'><span>+</span> Add Question</button>
   </header>
 
   <article>
@@ -32,7 +32,7 @@
 
     <!-- Questions go here -->
     <div class='questions' ng-show='showQuestion(question.difficulty)' ng-repeat='question in questions | filter: animal'>
-        <img id='gear' src='./styles/assets/gear.svg' ng-click='editQuestion()'>
+        <img id='gear' src='./styles/assets/gear.svg' ng-click='editQuestion($index)'>
         <div class='difficultyLevel'></div>
         {{ question.question }}
         <div class='answer a'>A. {{ question.options[1] }}</div>
@@ -45,51 +45,57 @@
     <button class='previousButton'  ng-click='previous()'>Previous</button>
     <button class='nextButton' ng-click='next()'>Next</button>
 
+    {{ questionInfo }}
+    {{ optionsInfo }}
+    {{ difficultyInfo }}
+    {{ animalInfo }}
+
   </article>
 
   
 
   <div class="modal" ng-if='showModal'>
     <form>
+      {{ questionInfo }}
       <h4 class="close" ng-click='closeModal()'>X</h4>
-      <span>Question</span><input value={{difficulty}} type="text" ng-model="<!-- Question -->">
-      <span>Animal it's about</span><input type="text" ng-model="<!-- Animal -->">
+      <span>Question</span><input type="text" ng-model="questionInfo">
+      <span>Animal it's about</span><input type="text" ng-model="animalInfo">
       <span>Difficulty</span>
       <div class="range">
-        <input type="range" min="1" max="3" ng-model="<!-- Difficulty -->">
+        <input type="range" min="1" max="3" ng-model="difficultyInfo">
 
         <h5>{{newQuestion.difficulty}}</h5>
       </div>
       <h4>Options</h4>
       <div>
         <input type="radio" ng-model="" value="1">
-        <input type="text" ng-model="">
+        <input type="text" ng-model="optionsInfo['1']">
       </div>
       <div>
         <input type="radio" ng-model="" value="2">
-        <input type="text" ng-model="">
+        <input type="text" ng-model="optionsInfo['2']">
       </div>
       <div>
         <input type="radio" ng-model="" value="3">
-        <input type="text" ng-model="">
+        <input type="text" ng-model="optionsInfo['3']">
       </div>
       <div>
         <input type="radio" ng-model="" value="4">
-        <input type="text" ng-model="">
+        <input type="text" ng-model="optionsInfo['4']">
       </div>
 
       <!--Add question buttons-->
       
 
-      <div class="buttons" ng-show='addingQuestion'>
-        <button class="green">Save Question</button>
+      <div class="buttons">
+        <button class="green" ng-click='addQuestionToServer()'>Save Question</button>
         <button>Cancel</button>
       </div>
 
       <!--Edit & Delete question buttons-->
-      <div class="buttons" ng-hide='addingQuestion'>
+      <div class="buttons">
         <button class="red">Delete Question</button>
-        <button class="green">Save Changes</button>
+        <button class="green" ng-click='editdata()'>Save Changes</button>
         <button>Cancel</button>
       </div>
 
