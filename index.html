@@ -15,15 +15,15 @@
   <header>
     <div></div>
     <h1>Trivia Trends</h1>
-    <button><span>+</span> Add Question</button>
+    <button ng-click='addQuestion'><span>+</span> Add Question</button>
   </header>
 
   <article>
     <nav>
-      <a ng-click="hideAnimalSearchBox()">All Questions</a>
-      <a>Easy</a>
-      <a>Medium</a>
-      <a>Hard</a>
+      <a ng-click="allAnimals()">All Questions</a>
+      <a ng-click='filterDifficulty(1)'>Easy</a>
+      <a ng-click='filterDifficulty(2)'>Medium</a>
+      <a ng-click='filterDifficulty(3)'>Hard</a>
       <a ng-click='showAnimalSearchBox()'>Search by Animal</a>
     </nav>
     <div class="search">
@@ -31,14 +31,15 @@
     </div>
 
     <!-- Questions go here -->
-    <div class='questions' ng-repeat='question in questions | filter: animal track by $index'>
-      <div ng-class="{'green': correct, 'red': !correct}">
+    <div class='questions' ng-show='showQuestion(question.difficulty)' ng-repeat='question in questions | filter: animal'>
+        <img id='gear' src='./styles/assets/gear.svg' ng-click='editQuestion()'>
+        <div class='difficultyLevel'></div>
         {{ question.question }}
-        <div class='answer a' ng-click='addClass(question.correct_answer, 1)'>A. {{ question.options[1] }}</div>
-        <div class='answer b' ng-click='addClass(question.correct_answer, 2)'>B. {{ question.options[2] }}</div>
-        <div class='answer c' ng-click='addClass(question.correct_answer, 3)'>C. {{ question.options[3] }}</div>
-        <div class='answer d' ng-click='addClass(question.correct_answer, 4)'>D. {{ question.options[4] }}</div>
-      </div>
+        <div class='answer a'>A. {{ question.options[1] }}</div>
+        <div class='answer b'>B. {{ question.options[2] }}</div>
+        <div class='answer c'>C. {{ question.options[3] }}</div>
+        <div class='answer d'>D. {{ question.options[4] }}</div>
+      
     </div>
 
     <button class='previousButton'  ng-click='previous()'>Previous</button>
@@ -48,10 +49,10 @@
 
   
 
-  <div class="modal">
+  <div class="modal" ng-if='showModal'>
     <form>
-      <h4 class="close">X</h4>
-      <span>Question</span><input type="text" ng-model="<!-- Question -->">
+      <h4 class="close" ng-click='closeModal()'>X</h4>
+      <span>Question</span><input value={{difficulty}} type="text" ng-model="<!-- Question -->">
       <span>Animal it's about</span><input type="text" ng-model="<!-- Animal -->">
       <span>Difficulty</span>
       <div class="range">
@@ -80,13 +81,13 @@
       <!--Add question buttons-->
       
 
-      <div class="buttons">
+      <div class="buttons" ng-show='addingQuestion'>
         <button class="green">Save Question</button>
         <button>Cancel</button>
       </div>
 
       <!--Edit & Delete question buttons-->
-      <div class="buttons">
+      <div class="buttons" ng-hide='addingQuestion'>
         <button class="red">Delete Question</button>
         <button class="green">Save Changes</button>
         <button>Cancel</button>

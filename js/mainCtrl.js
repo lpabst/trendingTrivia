@@ -2,7 +2,9 @@ angular.module('myApp')
     .controller('mainCtrl', function($scope, mainService){
 
 $scope.animalSearch = false;
-$scope.correct;
+$scope.difficulty = 0;
+$scope.showModal = false;
+$scope.addingQuestion = true;
 
 
 $scope.getData = function(){
@@ -24,22 +26,39 @@ $scope.previous = function(){
     $scope.getData();
 }
 
-$scope.addClass = function(correctAnswer, selectedAnswer){
-
-    if (correctAnswer === selectedAnswer){
-        $scope.correct = true;
-    }else{
-        $scope.correct = false;
-    }
-    console.log($scope.correct);
-}
-
 $scope.showAnimalSearchBox = function(){
     $scope.animalSearch = true;
 }
 
-$scope.hideAnimalSearchBox = function(){
+$scope.allAnimals = function(){
     $scope.animalSearch = false;
+    $scope.filterDifficulty(0);
+}
+
+$scope.filterDifficulty = function(num){
+    $scope.difficulty = num;
+}
+
+$scope.showQuestion = function(diff){
+    if ($scope.difficulty === 0 || $scope.difficulty === diff){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+$scope.closeModal = function(){
+    $scope.showModal = false;
+}
+
+$scope.editQuestion = function(){
+    $scope.showModal = true;
+    $scope.addingQuestion = false;
+}
+
+$scope.addQuestion = function(){
+    $scope.showModal = true;
+    $scope.addingQuestion = true;
 }
 
 

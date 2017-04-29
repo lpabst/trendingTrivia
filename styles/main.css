@@ -153,7 +153,7 @@ label, input[type="radio"], input[type="range"] {
   width: 100vw;
   background: rgba(88, 88, 88, 0.55);
   display: flex;
-  display: none; /* ALERTDELETEME - REMOVE THIS line only WHEN STYLING THE MODAL*/
+  /*display: none;  ALERTDELETEME - REMOVE THIS line only WHEN STYLING THE MODAL*/
   justify-content: center;
   align-items: center;
 }
@@ -249,13 +249,13 @@ input[type="range"] {
 .a{
   position: absolute;
   left: 5px;
-  top: 25px;
+  top: 30px;
 }
 
 .b{
   position: absolute;
   right: 5px;
-  top: 25px;
+  top: 30px;
 }
 
 .c{
@@ -280,4 +280,20 @@ input[type="range"] {
   position: absolute;
   bottom: 10px;
   right: 10px;
+}
+
+#gear{
+  width: 20px;
+  position: absolute;
+  right: 80px;
+  top: 5px;
+}
+
+.difficultyLevel{
+  width: 65px;
+  height: 20px;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  background: yellow;
 }
